@@ -66,25 +66,6 @@ Player.prototype.update = function () {
     }
 };
 
-function resetData() {
-    player.x = 303;
-    player.y = 380;
-    stone = new Stone(101 * Math.floor(Math.random() * 5 + 1), 60);
-    player.score = 0;
-    updateScore(player.score)
-    star = new Star(101 * Math.floor(Math.random() * 5 + 1), 155);
-}
-
-function starCollision() {
-    if (player.x < star.x + 60 &&
-        player.x + 37 > star.x &&
-        player.y < star.y + 25 &&
-        30 + player.y > star.y) {
-        player.score += 500;
-        updateScore(player.score);
-        hideStar();
-    }
-}
 
 // Draw player
 Player.prototype.render = function () {
@@ -148,6 +129,7 @@ Stone.prototype.update = function () {
 
 let stone = new Stone(101 * Math.floor(Math.random() * 5 + 1), 60);
 
+// Initialize star
 let Star = function (x, y) {
     this.x = x;
     this.y = y;
@@ -155,6 +137,7 @@ let Star = function (x, y) {
 
 };
 
+// Draw star
 Star.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -174,13 +157,36 @@ document.addEventListener('keyup', function (e) {
 
 let score = document.getElementById('score');
 
+// Update score when particular object is collected
 function updateScore(c) {
     score.innerHTML = 'Score : ' + c;
 }
-
 updateScore(player.score);
 
+// Hide star when collected
 function hideStar() {
     star.x = 1000;
     star.y = 1000;
+}
+
+// reset game
+function resetData() {
+    player.x = 303;
+    player.y = 380;
+    stone = new Stone(101 * Math.floor(Math.random() * 5 + 1), 60);
+    player.score = 0;
+    updateScore(player.score)
+    star = new Star(101 * Math.floor(Math.random() * 5 + 1), 155);
+}
+
+// When player collects star
+function starCollision() {
+    if (player.x < star.x + 60 &&
+        player.x + 37 > star.x &&
+        player.y < star.y + 25 &&
+        30 + player.y > star.y) {
+        player.score += 500;
+        updateScore(player.score);
+        hideStar();
+    }
 }
