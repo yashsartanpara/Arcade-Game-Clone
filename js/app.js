@@ -1,3 +1,6 @@
+let localData, localValue;
+let leader = document.getElementById('leader');
+
 // Enemies our player must avoid
 let Enemy = function (x, y, s) {
 
@@ -24,6 +27,7 @@ Enemy.prototype.update = function (dt) {
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
         30 + player.y > this.y) {
+        alert("Bug bites you");
         resetData()
     }
 };
@@ -61,6 +65,7 @@ Player.prototype.update = function () {
 
     // Check for player reaching river to win game
     if (this.y < 0) {
+
         window.alert('Congratulations, You won');
         resetData();
     }
@@ -75,19 +80,18 @@ Player.prototype.render = function () {
 // Manage key press to move player
 Player.prototype.handleInput = function (keyPress) {
     starCollision();
-    switch (keyPress) {
-        case 'left':
-            this.x -= this.speed + 50;
-            break;
-        case 'up':
-            this.y -= this.speed + 30;
-            break;
-        case 'right':
-            this.x += this.speed + 50;
-            break;
-        case 'down':
-            this.y += this.speed + 30;
-            break;
+    heartCollision();
+    if (keyPress === 'left') {
+        this.x -= this.speed + 50;
+    }
+    else if (keyPress === 'up') {
+        this.y -= this.speed + 30;
+    }
+    else if (keyPress === 'right') {
+        this.x += this.speed + 50;
+    }
+    else if (keyPress === 'down') {
+        this.y += this.speed + 30;
     }
 };
 
@@ -120,6 +124,7 @@ Stone.prototype.update = function () {
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
         30 + player.y > this.y) {
+        alert("You cant pass through Rock")
         player.x = 303;
         player.y = 380;
         stone.x = 101 * Math.floor(Math.random() * 5 + 1);
@@ -142,7 +147,23 @@ Star.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-let star = new Star(101 * Math.floor(Math.random() * 5 + 1), 155);
+let star = new Star(101 * Math.floor(Math.random() * 5 + 1), 230);
+
+// Initialize Heart
+let Heart = function (x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/Heart.png';
+
+};
+
+// Draw star
+Heart.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+let heart = new Heart(101 * Math.floor(Math.random() * 5 + 1), 155);
+
 
 document.addEventListener('keyup', function (e) {
     let allowedKeys = {
@@ -159,8 +180,16 @@ let score = document.getElementById('score');
 
 // Update score when particular object is collected
 function updateScore(c) {
+    localValue = saveToLocal(player.score);
+    if (localValue === null) {
+        leader.innerHTML = 'Leader : ' + c ;
+    }
+    else {
+        leader.innerHTML = 'Leader : ' + localValue ;
+    }
     score.innerHTML = 'Score : ' + c;
 }
+
 updateScore(player.score);
 
 // Hide star when collected
@@ -169,14 +198,21 @@ function hideStar() {
     star.y = 1000;
 }
 
+function hideHeart() {
+    heart.x = 1000;
+    heart.y = 1000;
+}
+
 // reset game
 function resetData() {
     player.x = 303;
     player.y = 380;
     stone = new Stone(101 * Math.floor(Math.random() * 5 + 1), 60);
+    saveToLocal(player.score);
     player.score = 0;
-    updateScore(player.score)
-    star = new Star(101 * Math.floor(Math.random() * 5 + 1), 155);
+    updateScore(player.score);
+    star = new Star(101 * Math.floor(Math.random() * 5 + 1), 230);
+    heart = new Heart(101 * Math.floor(Math.random() * 5 + 1), 155);
 }
 
 // When player collects star
@@ -189,4 +225,22 @@ function starCollision() {
         updateScore(player.score);
         hideStar();
     }
+}
+
+function heartCollision() {
+    if (player.x < heart.x + 60 &&
+        player.x + 37 > heart.x &&
+        player.y < heart.y + 25 &&
+        30 + player.y > heart.y) {
+        player.score += 1500;
+        updateScore(player.score);
+        hideHeart();
+    }
+}
+function saveToLocal(score) {
+    localData = window.localStorage.getItem("Leader");
+    if (localData < score || localData === null) {
+        window.localStorage.setItem("Leader", score);
+    }
+    return localData;
 }

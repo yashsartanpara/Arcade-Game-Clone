@@ -93,6 +93,7 @@ let Engine = (function (global) {
         player.render();
         stone.render();
         star.render();
+        heart.render();
     }
 
     // Load all the required images
@@ -107,7 +108,8 @@ let Engine = (function (global) {
         'images/char-pink-girl.png',
         'images/char-princess-girl.png',
         'images/Rock.png',
-        'images/Star.png'
+        'images/Star.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 
@@ -142,5 +144,8 @@ let Engine = (function (global) {
     let divNode = doc.createElement('DIV');
     divNode.setAttribute('id', 'score');
     bodySelect[0].appendChild(divNode);
+    let divNode1 = doc.createElement('DIV');
+    divNode1.setAttribute('id', 'leader');
+    bodySelect[0].appendChild(divNode1);
 
 })(this);
