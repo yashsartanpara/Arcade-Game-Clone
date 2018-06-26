@@ -1,6 +1,5 @@
 let localData, localValue;
 let leader = document.getElementById('leader');
-
 // Enemies our player must avoid
 let Enemy = function (x, y, s) {
 
@@ -124,7 +123,7 @@ Stone.prototype.update = function () {
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
         30 + player.y > this.y) {
-        alert("You cant pass through Rock")
+        alert("You cant pass through Rock");
         player.x = 303;
         player.y = 380;
         stone.x = 101 * Math.floor(Math.random() * 5 + 1);
@@ -182,10 +181,10 @@ let score = document.getElementById('score');
 function updateScore(c) {
     localValue = saveToLocal(player.score);
     if (localValue === null) {
-        leader.innerHTML = 'Leader : ' + c ;
+        leader.innerHTML = 'Leader : ' + c;
     }
     else {
-        leader.innerHTML = 'Leader : ' + localValue ;
+        leader.innerHTML = 'Leader : ' + localValue;
     }
     score.innerHTML = 'Score : ' + c;
 }
@@ -237,6 +236,7 @@ function heartCollision() {
         hideHeart();
     }
 }
+
 function saveToLocal(score) {
     localData = window.localStorage.getItem("Leader");
     if (localData < score || localData === null) {

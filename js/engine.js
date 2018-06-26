@@ -5,6 +5,7 @@ let Engine = (function (global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
+
     canvas.width = 606;
     canvas.height = 600;
     doc.body.appendChild(canvas);
@@ -80,8 +81,13 @@ let Engine = (function (global) {
             ctx.drawImage(Resources.get(rowImages[a]), 0, count * 110);
             count++;
         }
+
         renderEntities();
     }
+
+    // To make height of character sprites responsive.
+    let character1Height = (ctx.canvas.clientHeight + ctx.canvas.clientHeight * 0.25) / 5,
+        otherCharacterHeight = (ctx.canvas.clientHeight - ctx.canvas.clientHeight * 0.1) / 5;
 
     // Render all objects
     function renderEntities() {
@@ -118,21 +124,24 @@ let Engine = (function (global) {
 
     // Select which player you want to play
     function selectSprite() {
+
         let canvasArea = document.getElementsByTagName('canvas');
         canvasArea[0].onclick = function (event) {
-            if (event.layerX < 110 && event.layerY > 500) {
+            console.log(event);
+            if (event.layerX < 110 && event.layerY > (character1Height + (otherCharacterHeight * 3))) {
                 player.sprite = 'images/char-princess-girl.png';
             }
-            else if (event.layerX < 110 && event.layerY > 400) {
+            else if (event.layerX < 110 && event.layerY > (character1Height + (otherCharacterHeight * 2))) {
                 player.sprite = 'images/char-pink-girl.png';
             }
-            else if (event.layerX < 110 && event.layerY > 300) {
+            else if (event.layerX < 110 && event.layerY > (character1Height + otherCharacterHeight)) {
                 player.sprite = 'images/char-horn-girl.png';
             }
-            else if (event.layerX < 110 && event.layerY > 200) {
+            else if (event.layerX < 110 && event.layerY > character1Height) {
                 player.sprite = 'images/char-cat-girl.png';
             }
-            else if (event.layerX < 110 && event.layerY > 100) {
+            else if (event.layerX < 110 && event.layerY < character1Height) {
+                console.log('boy')
                 player.sprite = 'images/char-boy.png';
             }
 
