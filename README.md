@@ -8,3 +8,8 @@ https://arcadegame.captaintorch.tech
 * Use arrow key to move character.
 * Collision with Bug or Rock will eliminate you
 * Collect star to increase score
+
+## To run this game locally
+
+* Clone or download this repository
+* Open index.html in browser or use http-server node module.

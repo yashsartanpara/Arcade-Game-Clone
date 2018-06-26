@@ -1,5 +1,5 @@
-let localData, localValue;
-let leader = document.getElementById('leader');
+let localData, localValue,
+    leader = document.getElementById('leader');
 // Enemies our player must avoid
 let Enemy = function (x, y, s) {
 
@@ -156,13 +156,12 @@ let Heart = function (x, y) {
 
 };
 
-// Draw star
+// Draw Heart
 Heart.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 let heart = new Heart(101 * Math.floor(Math.random() * 5 + 1), 155);
-
 
 document.addEventListener('keyup', function (e) {
     let allowedKeys = {
@@ -197,6 +196,7 @@ function hideStar() {
     star.y = 1000;
 }
 
+// Hide heart when collected
 function hideHeart() {
     heart.x = 1000;
     heart.y = 1000;
@@ -226,6 +226,7 @@ function starCollision() {
     }
 }
 
+// When player collects heart
 function heartCollision() {
     if (player.x < heart.x + 60 &&
         player.x + 37 > heart.x &&
@@ -237,6 +238,7 @@ function heartCollision() {
     }
 }
 
+// Save leader score to localstorage
 function saveToLocal(score) {
     localData = window.localStorage.getItem("Leader");
     if (localData < score || localData === null) {
