@@ -1,5 +1,26 @@
 let localData, localValue,
     leader = document.getElementById('leader');
+
+let up = document.getElementById('up');
+up.addEventListener('touchend', function () {
+    player.handleInput('up')
+});
+
+let down = document.getElementById('down');
+down.addEventListener('touchend', function () {
+    player.handleInput('down')
+});
+
+let left = document.getElementById('left');
+left.addEventListener('touchend', function () {
+    player.handleInput('left')
+});
+
+let right = document.getElementById('right');
+right.addEventListener('touchend', function () {
+    player.handleInput('right')
+});
+
 // Enemies our player must avoid
 let Enemy = function (x, y, s) {
 

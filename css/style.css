@@ -48,3 +48,27 @@ body {
         width: 606px;
     }
 }
+
+@media (min-width: 1050px) {
+    #touch {
+        display: none !important;
+    }
+}
+
+#touch {
+    width: 100%;
+    font-size: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#up, #down, #left, #right {
+    color: deepskyblue;
+}
