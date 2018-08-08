@@ -1,3 +1,5 @@
+let allEnemies = [];
+
 let Engine = (function (global) {
 
     let doc = global.document,

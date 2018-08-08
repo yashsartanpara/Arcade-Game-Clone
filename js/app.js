@@ -116,7 +116,7 @@ Player.prototype.handleInput = function (keyPress) {
 };
 
 // Initializing enemies
-let allEnemies = [];
+
 let enemyPosition = [60, 140, 220];
 let player = new Player(303, 380, 50, 0);
 let enemy;
