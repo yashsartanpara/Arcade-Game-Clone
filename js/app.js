@@ -1,4 +1,4 @@
-let localData, localValue,
+let localData, localValue,resetTimeOut,
     leader = document.getElementById('leader');
 
 let up = document.getElementById('up');
@@ -47,10 +47,25 @@ Enemy.prototype.update = function (dt) {
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
         30 + player.y > this.y) {
-        alert("Bug bites you");
-        resetData()
+        resetTimeOut = setTimeout(function () {
+            lose()
+        }, 20);
     }
 };
+
+//Lost
+
+function lose() {
+    alert("Bug bites you");
+    clearTimeout(resetTimeOut);
+    resetData();
+}
+
+function win() {
+    alert("Congratulation, you won.");
+    clearTimeout(resetTimeOut);
+    resetData();
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
@@ -86,8 +101,9 @@ Player.prototype.update = function () {
     // Check for player reaching river to win game
     if (this.y < 0) {
 
-        window.alert('Congratulations, You won');
-        resetData();
+        resetTimeOut = setTimeout(function () {
+            win()
+        }, 20);
     }
 };
 

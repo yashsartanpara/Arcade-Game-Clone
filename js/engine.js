@@ -18,8 +18,8 @@ let Engine = (function (global) {
         let now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
-        update(dt);
         render();
+        update(dt);
 
         lastTime = now;
 
@@ -40,10 +40,10 @@ let Engine = (function (global) {
 
 // Update all objects
     function updateEntities(dt) {
+        player.update();
         allEnemies.forEach(function (enemy) {
             enemy.update(dt);
         });
-        player.update();
         stone.update();
     }
 
@@ -94,11 +94,11 @@ let Engine = (function (global) {
     // Render all objects
     function renderEntities() {
 
+        player.render();
         allEnemies.forEach(function (enemy) {
             enemy.render();
-        });
 
-        player.render();
+        });
         stone.render();
         star.render();
         heart.render();
