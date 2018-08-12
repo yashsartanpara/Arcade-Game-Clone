@@ -1,4 +1,4 @@
-let localData, localValue,resetTimeOut,
+let localData, localValue, resetTimeOut,
     leader = document.getElementById('leader');
 
 let up = document.getElementById('up');
@@ -115,8 +115,7 @@ Player.prototype.render = function () {
 
 // Manage key press to move player
 Player.prototype.handleInput = function (keyPress) {
-    starCollision();
-    heartCollision();
+
     if (keyPress === 'left') {
         this.x -= this.speed + 50;
     }
@@ -129,6 +128,8 @@ Player.prototype.handleInput = function (keyPress) {
     else if (keyPress === 'down') {
         this.y += this.speed + 30;
     }
+    starCollision();
+    heartCollision();
 };
 
 // Initializing enemies
