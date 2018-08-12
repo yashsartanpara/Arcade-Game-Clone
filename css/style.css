@@ -69,6 +69,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: absolute;
+    bottom: 0;
 }
 
 #bottom {
