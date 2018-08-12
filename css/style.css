@@ -70,7 +70,7 @@ body {
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    bottom: 0;
+    bottom: 5%;
 }
 
 #bottom {
