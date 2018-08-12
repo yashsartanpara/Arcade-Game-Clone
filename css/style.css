@@ -33,6 +33,10 @@ body {
         float: left;
     }
 
+    #instructions {
+        display: none;
+    }
+
     canvas {
         width: 100%;
     }
@@ -42,6 +46,10 @@ body {
     #instructions {
         position: relative;
         float: left;
+    }
+
+    #instructions {
+        display: none
     }
 
     canvas {
@@ -57,7 +65,7 @@ body {
 
 #touch {
     width: 100%;
-    font-size: 32px;
+    font-size: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,4 +79,5 @@ body {
 
 #up, #down, #left, #right {
     color: deepskyblue;
+    padding: 5px;
 }
